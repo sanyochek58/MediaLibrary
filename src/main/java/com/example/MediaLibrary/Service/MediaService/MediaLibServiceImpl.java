@@ -25,17 +25,17 @@ public class MediaLibServiceImpl implements MediaLibService{
 
     @Override
     public List<MediaLibDTO> getMediaByType(MediaType type){
-        return mediaLibRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+        return mediaLibRepository.findByType(type).stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     private MediaLibDTO toDTO(MediaLib media){
         MediaLibDTO dto = new MediaLibDTO();
         dto.setId(media.getId());
-        dto.setType(dto.getType());
-        dto.setName(dto.getName());
-        dto.setDate(dto.getDate());
-        dto.setDescription(dto.getDescription());
-        dto.setFilename(dto.getFilename());
+        dto.setType(media.getType());
+        dto.setName(media.getName());
+        dto.setDate(media.getDate());
+        dto.setDescription(media.getDescription());
+        dto.setFilename(media.getFilename());
         return dto;
     }
 }

@@ -8,6 +8,7 @@ import com.example.MediaLibrary.repository.MediaLibRepository;
 import com.example.MediaLibrary.repository.UsersRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,8 @@ public class DataInitializer {
             Users users = new Users();
             users.setUsername("admin");
             users.setEmail("admin@admin.ru");
-            users.setPassword("admin");
+            String encPassword = new BCryptPasswordEncoder().encode("admin123");
+            users.setPassword(encPassword);
             users.setDate_of_birth("03/11/2005");
             usersRepository.save(users);
 
